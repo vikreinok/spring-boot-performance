@@ -1,7 +1,6 @@
-package hello;
+package performance;
 
 import io.gatling.javaapi.core.ChainBuilder;
-import io.gatling.javaapi.core.FeederBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -15,15 +14,14 @@ import static io.gatling.javaapi.http.HttpDsl.http;
 
 public class LoadTest extends Simulation {
 
-    FeederBuilder<String> feeder = csv("search.csv").random();
 
     ChainBuilder search =
             exec(http("Home").get("/"))
                     .pause(1)
-                    .feed(feeder)
                     .exec(
                             http("Search")
-                                    .get("/?f=#{searchCriterion}")
+                                    .get("/")
+                                    .header("X-country", "DE")
                                     .basicAuth("user", "test")
                     )
                     .pause(1);

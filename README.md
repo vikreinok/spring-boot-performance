@@ -1,6 +1,8 @@
-A sample app to demonstrate revealing a performance problems with load testing.
+###
+A project to demonstrate performance difference between different types of autowiring concepts
 
-## Usage
+
+## How to run
 
 `mvn spring-boot:run` to start the webapp - see the amazing feature at http://localhost:8080/
 
