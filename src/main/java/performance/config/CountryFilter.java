@@ -1,6 +1,5 @@
 package performance.config;
 
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import performance.Country;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component
-@Order(1)
 public class CountryFilter implements Filter {
 
     @Override
@@ -34,15 +32,14 @@ public class CountryFilter implements Filter {
             throw new CountryNotDefinedException("Header X-country is missing");
         }
 
-        final Country country;
+        Country country;
         try {
-            country = Country.valueOf(xCountryHeader);
+            country = Country.fromString(xCountryHeader);
         } catch (IllegalArgumentException e) {
             throw new CountryNotSupportedException("Country not supported. " + xCountryHeader);
         }
 
         CountryHolder.setCountry(country);
-
 
         chain.doFilter(request, response);
     }
