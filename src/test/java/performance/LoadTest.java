@@ -1,31 +1,38 @@
 package performance;
 
-import io.gatling.javaapi.core.ChainBuilder;
+import io.gatling.javaapi.core.FeederBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
-import static io.gatling.javaapi.core.CoreDsl.csv;
-import static io.gatling.javaapi.core.CoreDsl.exec;
-import static io.gatling.javaapi.core.CoreDsl.rampUsers;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static io.gatling.javaapi.core.CoreDsl.listFeeder;
 import static io.gatling.javaapi.core.CoreDsl.scenario;
+import static io.gatling.javaapi.core.CoreDsl.stressPeakUsers;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
 
 public class LoadTest extends Simulation {
 
+    final FeederBuilder<Object> headerFeeder = listFeeder(Arrays.asList(
+            Collections.singletonMap("X-Country", "CH"),
+            Collections.singletonMap("X-Country", "DE")
+    ));
 
-    ChainBuilder search =
-            exec(http("Home").get("/"))
-                    .pause(1)
-                    .exec(
-                            http("Search")
-                                    .get("/")
-                                    .header("X-country", "DE")
-                                    .basicAuth("user", "test")
-                    )
-                    .pause(1);
+    ScenarioBuilder scenario1;
 
+    {
+
+        scenario1 = scenario("call").feed(headerFeeder.random())
+        .exec(http("Call")
+                .get("/")
+                .header("X-Country", "#{X-Country}")
+                .basicAuth("user", "test")
+        ).pause(0);
+    }
 
     HttpProtocolBuilder httpProtocol =
             http.baseUrl("http://localhost:8080")
@@ -36,11 +43,10 @@ public class LoadTest extends Simulation {
                         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
                 );
 
-    ScenarioBuilder users = scenario("Users").exec(search);
-
     {
         setUp(
-                users.injectOpen(rampUsers(10).during(10))
+//                scenario1.injectOpen(rampUsers(300).during(Duration.ofSeconds(30)))
+                scenario1.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30)))
         ).protocols(httpProtocol);
     }
 

@@ -37,13 +37,17 @@ public class TestControllerIntegrationTest {
 
     @Test
     public void restCallWithHeaderXCountryWithValueCH() throws Exception {
-        mockMvc.perform(get("/").header("X-Country", "CH")).andExpect(status().isOk())
+        mockMvc.perform(get("/")
+                       .header("X-Country", "CH"))
+               .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 120 km/h on highway"));
     }
 
     @Test
     public void restCallWithHeaderXCountryWithValueDE() throws Exception {
-        mockMvc.perform(get("/").header("X-Country", "DE")).andExpect(status().isOk())
+        mockMvc.perform(get("/")
+                       .header("X-Country", "DE"))
+               .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 200 km/h on highway"));
     }
 

@@ -21,11 +21,12 @@ public class TestController {
         return beanFactory.getBean(SpeedLimitService.class.getSimpleName() + country.name(), SpeedLimitService.class);
     }
 
-
     @RequestMapping
     public String index() {
-        return "Speed limit is " + getSpeedLimitService().getCitySpeedLimit() + " km/h in city and " + getSpeedLimitService()
+        final String message = "Speed limit is " + getSpeedLimitService().getCitySpeedLimit() + " km/h in city and " + getSpeedLimitService()
                 .getHighwaySpeedLimit() + " km/h on highway";
+        System.err.println(message);
+        return message;
     }
 
 }

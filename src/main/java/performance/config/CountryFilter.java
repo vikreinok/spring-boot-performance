@@ -1,6 +1,7 @@
 package performance.config;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import performance.Country;
 import performance.context.CountryHolder;
@@ -25,11 +26,11 @@ public class CountryFilter implements Filter {
             FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
-        final String xCountryHeader = req.getHeader("X-country");
+        final String xCountryHeader = req.getHeader("X-Country");
 
         // check if xCountryHeader is black and throw exception
-        if (StringUtils.isEmpty(xCountryHeader)) {
-            throw new CountryNotDefinedException("Header X-country is missing");
+        if (ObjectUtils.isEmpty(xCountryHeader)) {
+            throw new CountryNotDefinedException("Header X-Country is missing");
         }
 
         Country country;
