@@ -7,12 +7,13 @@ import performance.Country;
 import performance.bussinesslogic.SpeedLimitService;
 import performance.context.CountryHolder;
 
-@RestController
-public class TestController {
+@RestController()
+@RequestMapping("/scenario2")
+public class Scenario2Controller {
 
     private final BeanFactory beanFactory;
 
-    public TestController(BeanFactory beanFactory) {
+    public Scenario2Controller(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
@@ -23,10 +24,8 @@ public class TestController {
 
     @RequestMapping
     public String index() {
-        final String message = "Speed limit is " + getSpeedLimitService().getCitySpeedLimit() + " km/h in city and " + getSpeedLimitService()
+        return "Speed limit is " + getSpeedLimitService().getCitySpeedLimit() + " km/h in city and " + getSpeedLimitService()
                 .getHighwaySpeedLimit() + " km/h on highway";
-        System.err.println(message);
-        return message;
     }
 
 }

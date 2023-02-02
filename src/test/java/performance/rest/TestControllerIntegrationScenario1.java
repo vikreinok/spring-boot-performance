@@ -21,11 +21,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = Application.class)
-@ContextConfiguration(classes = {TestController.class, ExceptionHandlerAdvice.class})
+@ContextConfiguration(classes = {Scenario2Controller.class, ExceptionHandlerAdvice.class})
 @AutoConfigureMockMvc(printOnlyOnFailure = false)
 @ExtendWith(MockitoExtension.class)
 @ImportAutoConfiguration(ExceptionHandlerAdvice.class)
-public class TestControllerIntegrationTest {
+public class TestControllerIntegrationScenario1 {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,7 +37,7 @@ public class TestControllerIntegrationTest {
 
     @Test
     public void restCallWithHeaderXCountryWithValueCH() throws Exception {
-        mockMvc.perform(get("/")
+        mockMvc.perform(get("/scenario2")
                        .header("X-Country", "CH"))
                .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 120 km/h on highway"));
@@ -45,7 +45,7 @@ public class TestControllerIntegrationTest {
 
     @Test
     public void restCallWithHeaderXCountryWithValueDE() throws Exception {
-        mockMvc.perform(get("/")
+        mockMvc.perform(get("/scenario2")
                        .header("X-Country", "DE"))
                .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 200 km/h on highway"));
@@ -53,19 +53,19 @@ public class TestControllerIntegrationTest {
 
     @Test
     public void restCallWithHeaderXCountryWithValidValueLowercase() throws Exception {
-        mockMvc.perform(get("/").header("X-Country", "ch")).andExpect(status().isOk());
+        mockMvc.perform(get("/scenario2").header("X-Country", "ch")).andExpect(status().isOk());
     }
 
     @Test
     public void restCallWithHeaderXCountryWithValueUS() {
         assertThrows(CountryNotSupportedException.class, () ->
-                mockMvc.perform(get("/").header("X-Country", "US")));
+                mockMvc.perform(get("/scenario2").header("X-Country", "US")));
     }
 
     @Test
     public void restCallWithNoHeader() {
         assertThrows(CountryNotDefinedException.class, () ->
-                mockMvc.perform(get("/")));
+                mockMvc.perform(get("/scenario2")));
     }
 
 

@@ -15,6 +15,9 @@ import static io.gatling.javaapi.core.CoreDsl.stressPeakUsers;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
 
+/**
+ *
+ */
 public class LoadTest extends Simulation {
 
     final FeederBuilder<Object> headerFeeder = listFeeder(Arrays.asList(
@@ -23,30 +26,36 @@ public class LoadTest extends Simulation {
     ));
 
     ScenarioBuilder scenario1;
+    ScenarioBuilder scenario2;
 
     {
+        scenario1 = scenario("scenario1").exec(http("scenario1call")
+                                                 .get("/scenario1")
+                                                 .header("X-Country", "CH")
+                                                 .basicAuth("user", "test")
+                                         );
 
-        scenario1 = scenario("call").feed(headerFeeder.random())
-        .exec(http("Call")
-                .get("/")
+        scenario2 = scenario("scenario2").feed(headerFeeder.random())
+                                    .exec(http("scenario2call")
+                .get("/scenario2")
                 .header("X-Country", "#{X-Country}")
                 .basicAuth("user", "test")
-        ).pause(0);
+        );
     }
 
     HttpProtocolBuilder httpProtocol =
-            http.baseUrl("http://localhost:8080")
-                .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                .acceptLanguageHeader("en-US,en;q=0.5")
-                .acceptEncodingHeader("gzip, deflate")
-                .userAgentHeader(
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
-                );
+        http.baseUrl("http://localhost:8080")
+            .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+            .acceptLanguageHeader("en-US,en;q=0.5")
+            .acceptEncodingHeader("gzip, deflate")
+            .userAgentHeader(
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
+            );
 
     {
         setUp(
-//                scenario1.injectOpen(rampUsers(300).during(Duration.ofSeconds(30)))
-                scenario1.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30)))
+                scenario1.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30))),
+                scenario2.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30)))
         ).protocols(httpProtocol);
     }
 
