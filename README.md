@@ -1,6 +1,11 @@
 ###
-A project to demonstrate performance difference between different types of autowiring concepts
+A project to demonstrate different types of dependency injection concepts to improve the design of a Spring Boot application.
+Also, it compares the performance of different types of dependency injection.
 
+1. Simple Dependency Injection
+2. Local BeanFactory implementation
+3. AOP approach
+4. Making beans scope prototype
 
 ## How to run
 

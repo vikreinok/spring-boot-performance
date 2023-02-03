@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import performance.Application;
@@ -21,11 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = Application.class)
-@ContextConfiguration(classes = {Scenario2Controller.class, ExceptionHandlerAdvice.class})
+@ContextConfiguration(classes = {Scenario3Controller.class, ExceptionHandlerAdvice.class})
 @AutoConfigureMockMvc(printOnlyOnFailure = false)
 @ExtendWith(MockitoExtension.class)
 @ImportAutoConfiguration(ExceptionHandlerAdvice.class)
-public class TestControllerIntegrationScenario1 {
+@EnableAspectJAutoProxy
+public class Scenario3ControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,7 +39,7 @@ public class TestControllerIntegrationScenario1 {
 
     @Test
     public void restCallWithHeaderXCountryWithValueCH() throws Exception {
-        mockMvc.perform(get("/scenario2")
+        mockMvc.perform(get("/scenario3")
                        .header("X-Country", "CH"))
                .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 120 km/h on highway"));
@@ -45,7 +47,7 @@ public class TestControllerIntegrationScenario1 {
 
     @Test
     public void restCallWithHeaderXCountryWithValueDE() throws Exception {
-        mockMvc.perform(get("/scenario2")
+        mockMvc.perform(get("/scenario3")
                        .header("X-Country", "DE"))
                .andExpect(status().isOk())
                .andExpect(content().string("Speed limit is 50 km/h in city and 200 km/h on highway"));
@@ -53,19 +55,19 @@ public class TestControllerIntegrationScenario1 {
 
     @Test
     public void restCallWithHeaderXCountryWithValidValueLowercase() throws Exception {
-        mockMvc.perform(get("/scenario2").header("X-Country", "ch")).andExpect(status().isOk());
+        mockMvc.perform(get("/scenario3").header("X-Country", "ch")).andExpect(status().isOk());
     }
 
     @Test
     public void restCallWithHeaderXCountryWithValueUS() {
         assertThrows(CountryNotSupportedException.class, () ->
-                mockMvc.perform(get("/scenario2").header("X-Country", "US")));
+                mockMvc.perform(get("/scenario3").header("X-Country", "US")));
     }
 
     @Test
     public void restCallWithNoHeader() {
         assertThrows(CountryNotDefinedException.class, () ->
-                mockMvc.perform(get("/scenario2")));
+                mockMvc.perform(get("/scenario3")));
     }
 
 

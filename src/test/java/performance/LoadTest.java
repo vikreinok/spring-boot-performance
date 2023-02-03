@@ -27,6 +27,7 @@ public class LoadTest extends Simulation {
 
     ScenarioBuilder scenario1;
     ScenarioBuilder scenario2;
+    ScenarioBuilder scenario3;
 
     {
         scenario1 = scenario("scenario1").exec(http("scenario1call")
@@ -38,6 +39,13 @@ public class LoadTest extends Simulation {
         scenario2 = scenario("scenario2").feed(headerFeeder.random())
                                     .exec(http("scenario2call")
                 .get("/scenario2")
+                .header("X-Country", "#{X-Country}")
+                .basicAuth("user", "test")
+        );
+
+        scenario3 = scenario("scenario3").feed(headerFeeder.random())
+                                    .exec(http("scenario3call")
+                .get("/scenario3")
                 .header("X-Country", "#{X-Country}")
                 .basicAuth("user", "test")
         );
