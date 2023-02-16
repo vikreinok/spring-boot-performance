@@ -1,9 +1,10 @@
 package performance.bussinesslogic;
 
-import org.springframework.stereotype.Service;
+import performance.annotation.AutowiredCustom;
 
 public interface SpeedLimitService {
 
+    @AutowiredCustom
     default int getCitySpeedLimit() {
         return 50;
     }

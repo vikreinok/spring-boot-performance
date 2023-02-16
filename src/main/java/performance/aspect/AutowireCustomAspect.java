@@ -1,4 +1,4 @@
-package performance.bussinesslogic.aspect;
+package performance.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AutowireCustomAspect {
 
-
-    @Around("@annotation(performance.bussinesslogic.annotation.AutowireCustom)")
+    @Around("@annotation(performance.annotation.AutowiredCustom)")
     public Object onlyAutowiredCustom(final ProceedingJoinPoint pjp) throws Throwable {
         //do some stuff before invoking methods annotated with @AutowireCustom
         final Object returnValue = pjp.proceed();
