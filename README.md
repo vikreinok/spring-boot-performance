@@ -4,8 +4,10 @@ Also, it compares the performance of different types of dependency injection.
 
 1. Simple Dependency Injection
 2. Local BeanFactory implementation
-3. AOP approach
+3. AOP approach (AspectJ)
 4. Making beans scope prototype
+5. Do we get performance benefits from lightweight threads
+
 
 ## How to run
 
