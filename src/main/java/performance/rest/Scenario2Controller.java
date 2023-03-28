@@ -7,7 +7,7 @@ import performance.Country;
 import performance.bussinesslogic.SpeedLimitService;
 import performance.context.CountryHolder;
 
-@RestController()
+@RestController
 @RequestMapping("/scenario2")
 public class Scenario2Controller {
 

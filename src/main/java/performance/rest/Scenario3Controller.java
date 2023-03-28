@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import performance.annotation.AutowiredCustom;
 import performance.bussinesslogic.SpeedLimitService;
 
-@RestController()
+@RestController
 @RequestMapping("/scenario3")
 public class Scenario3Controller {
 
