@@ -25,9 +25,9 @@ public class LoadTest extends Simulation {
             Collections.singletonMap("X-Country", "DE")
     ));
 
-    ScenarioBuilder scenario1;
-    ScenarioBuilder scenario2;
-    ScenarioBuilder scenario3;
+    final ScenarioBuilder scenario1;
+    final ScenarioBuilder scenario2;
+    final ScenarioBuilder scenario3;
 
     {
         scenario1 = scenario("scenario1").exec(http("scenario1call")
@@ -51,7 +51,7 @@ public class LoadTest extends Simulation {
         );
     }
 
-    HttpProtocolBuilder httpProtocol =
+    final HttpProtocolBuilder httpProtocol =
         http.baseUrl("http://localhost:8080")
             .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
             .acceptLanguageHeader("en-US,en;q=0.5")

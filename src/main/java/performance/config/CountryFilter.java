@@ -2,7 +2,6 @@ package performance.config;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import performance.Country;
 import performance.context.CountryHolder;
 import performance.exception.CountryNotDefinedException;
