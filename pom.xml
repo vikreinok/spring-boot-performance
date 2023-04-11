@@ -25,8 +25,9 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
-
-     </properties>
+        <netty-handler.version>4.1.85.Final</netty-handler.version>
+        <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -52,7 +53,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-handler</artifactId>
-            <version>4.1.81.Final</version>
+            <version>${netty-handler.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -95,7 +96,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.14.0</version>
+                <version>${aspectj-maven-plugin.version}</version>
                 <configuration>
                     <complianceLevel>${java.version}</complianceLevel>
                     <source>${maven.compiler.source}</source>
