@@ -2,7 +2,7 @@
 A project to demonstrate different types of dependency injection concepts to improve the design of a Spring Boot application.
 Also, it compares the performance of different types of dependency injection.
 
-1. Simple Dependency Injection
+1. Simple Dependency Injection with factory
 2. Local BeanFactory implementation
 3. AOP approach (AspectJ)
 4. Making beans scope prototype
