@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import performance.bussinesslogic.SpeedLimitService;
 
 @Service("SpeedLimitServiceDE")
-//@Conditional(CountryDE.class)
 public class SpeedLimitServiceDE implements SpeedLimitService {
 
     @Override

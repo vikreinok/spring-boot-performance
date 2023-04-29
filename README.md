@@ -14,3 +14,5 @@ Also, it compares the performance of different types of dependency injection.
 `mvn spring-boot:run` to start the webapp - see the amazing feature at http://localhost:8080/
 
 `mvn gatling:test` while the webapp is running to run the performance test
+
+If AOP does not work, rebuild the project
