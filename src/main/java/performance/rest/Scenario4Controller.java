@@ -9,7 +9,7 @@ import performance.bussinesslogic.SpeedLimitServiceProto;
 @RequestMapping("/scenario4")
 public class Scenario4Controller {
 
-    @Autowired
+    @Autowired(required = false)
     public SpeedLimitServiceProto speedLimitServiceProto;
 
     @RequestMapping

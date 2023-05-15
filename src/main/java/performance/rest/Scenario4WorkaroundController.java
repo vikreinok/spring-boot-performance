@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/scenario4workaround")
 public class Scenario4WorkaroundController {
 
-    @Autowired
+    @Autowired(required = false)
     public List<SpeedLimitServiceProto> speedLimitServicePrototypes;
 
     @RequestMapping

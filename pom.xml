@@ -11,22 +11,24 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.6</version>
+        <version>2.7.11</version>
     </parent>
 
     <properties>
-        <java.version>20</java.version>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
+        <java.version>19</java.version>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <gatling.version>3.9.0</gatling.version>
+        <gatling.version>3.9.5</gatling.version>
         <gatling-maven-plugin.version>4.2.9</gatling-maven-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <netty-handler.version>4.1.85.Final</netty-handler.version>
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
+        <aspectj.version>1.9.19</aspectj.version>
     </properties>
 
     <dependencies>
@@ -68,6 +70,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -90,11 +103,16 @@
         </pluginManagement>
         <plugins>
             <plugin>
+                <!-- https://stackoverflow.com/questions/70083274/java-17-java-invalid-source-release-7-with-enable-preview-preview-language -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <source>19</source>
+                    <target>19</target>
+                    <compilerArgs>
+                        --enable-preview
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -119,9 +137,10 @@
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <version>${aspectj-maven-plugin.version}</version>
                 <configuration>
-                    <complianceLevel>${java.version}</complianceLevel>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--  We have to remember to keep aspects simple and not include new lang features  -->
+                    <complianceLevel>16</complianceLevel>
+                    <source>16</source>
+                    <target>16</target>
                     <showWeaveInfo>true</showWeaveInfo>
                     <verbose>true</verbose>
                     <Xlint>ignore</Xlint>
