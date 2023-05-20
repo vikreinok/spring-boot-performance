@@ -63,7 +63,8 @@ public class LoadTest extends Simulation {
     {
         setUp(
                 scenario1.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30))),
-                scenario2.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30)))
+                scenario2.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30))),
+                scenario3.injectOpen(stressPeakUsers(1000).during(Duration.ofSeconds(30)))
         ).protocols(httpProtocol);
     }
 
