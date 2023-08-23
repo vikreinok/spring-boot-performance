@@ -13,8 +13,8 @@ public class SpeedLimitServiceFactory {
     private final SpeedLimitServiceDE speedLimitServiceDE;
 
     public SpeedLimitServiceFactory(
-            SpeedLimitServiceCH speedLimitServiceCH,
-            SpeedLimitServiceDE speedLimitServiceDE) {
+        SpeedLimitServiceCH speedLimitServiceCH,
+        SpeedLimitServiceDE speedLimitServiceDE) {
         this.speedLimitServiceCH = speedLimitServiceCH;
         this.speedLimitServiceDE = speedLimitServiceDE;
     }

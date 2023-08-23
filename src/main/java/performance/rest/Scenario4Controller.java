@@ -15,7 +15,7 @@ public class Scenario4Controller {
     @RequestMapping
     public String index() {
         return "Speed limit is " + speedLimitServiceProto.getCitySpeedLimit() + " km/h in city and " + speedLimitServiceProto
-                .getHighwaySpeedLimit() + " km/h on highway";
+            .getHighwaySpeedLimit() + " km/h on highway";
     }
 
 }

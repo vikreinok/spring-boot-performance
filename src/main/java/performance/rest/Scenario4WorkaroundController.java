@@ -18,7 +18,7 @@ public class Scenario4WorkaroundController {
     public String index() {
         SpeedLimitServiceProto speedLimitServiceProto = speedLimitServicePrototypes.get(0);
         return "Speed limit is " + speedLimitServiceProto.getCitySpeedLimit() + " km/h in city and " + speedLimitServiceProto
-                .getHighwaySpeedLimit() + " km/h on highway";
+            .getHighwaySpeedLimit() + " km/h on highway";
     }
 
 }

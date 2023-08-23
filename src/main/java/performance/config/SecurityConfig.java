@@ -22,10 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder)
-                .withUser(username)
-                .password(passwordEncoder.encode(password))
-                .roles("USER");
+            .passwordEncoder(passwordEncoder)
+            .withUser(username)
+            .password(passwordEncoder.encode(password))
+            .roles("USER");
     }
 
     @Override

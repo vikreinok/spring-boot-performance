@@ -14,8 +14,8 @@ import java.util.concurrent.Executors;
 @EnableAsync
 @Configuration
 @ConditionalOnProperty(
-        value = "spring.thread-executor",
-        havingValue = "virtual"
+    value = "spring.thread-executor",
+    havingValue = "virtual"
 )
 public class ThreadConfig {
 

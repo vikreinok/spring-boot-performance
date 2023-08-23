@@ -1,4 +1,5 @@
 ###
+
 A project to demonstrate different types of dependency injection concepts to improve the design of a Spring Boot application.
 Also, it compares the performance of different types of dependency injection.
 
@@ -7,7 +8,6 @@ Also, it compares the performance of different types of dependency injection.
 3. AOP approach (AspectJ)
 4. Making beans scope prototype
 5. Do we get performance benefits from lightweight threads
-
 
 ## How to run
 

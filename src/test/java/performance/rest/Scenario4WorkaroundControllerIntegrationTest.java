@@ -40,17 +40,17 @@ public class Scenario4WorkaroundControllerIntegrationTest {
     @Test
     public void restCallWithHeaderXCountryWithValueCH() throws Exception {
         mockMvc.perform(get("/scenario4workaround")
-                       .header("X-Country", "CH"))
-               .andExpect(status().isOk())
-               .andExpect(content().string("Speed limit is 50 km/h in city and 120 km/h on highway"));
+                .header("X-Country", "CH"))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Speed limit is 50 km/h in city and 120 km/h on highway"));
     }
 
     @Test
     public void restCallWithHeaderXCountryWithValueDE() throws Exception {
         mockMvc.perform(get("/scenario4workaround")
-                       .header("X-Country", "DE"))
-               .andExpect(status().isOk())
-               .andExpect(content().string("Speed limit is 50 km/h in city and 200 km/h on highway"));
+                .header("X-Country", "DE"))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Speed limit is 50 km/h in city and 200 km/h on highway"));
     }
 
     @Test
@@ -61,13 +61,13 @@ public class Scenario4WorkaroundControllerIntegrationTest {
     @Test
     public void restCallWithHeaderXCountryWithValueUS() {
         assertThrows(CountryNotSupportedException.class, () ->
-                mockMvc.perform(get("/scenario4workaround").header("X-Country", "US")));
+            mockMvc.perform(get("/scenario4workaround").header("X-Country", "US")));
     }
 
     @Test
     public void restCallWithNoHeader() {
         assertThrows(CountryNotDefinedException.class, () ->
-                mockMvc.perform(get("/scenario4workaround")));
+            mockMvc.perform(get("/scenario4workaround")));
     }
 
 
