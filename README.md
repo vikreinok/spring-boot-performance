@@ -16,3 +16,10 @@ Also, it compares the performance of different types of dependency injection.
 `mvn gatling:test` while the webapp is running to run the performance test
 
 If AOP does not work, rebuild the project
+
+### Virtual threads experiment
+
+Switch between virtual threads by flicking following property:  
+`spring.thread-executor=virtual`
+
+Check out `ThreadConfig`
