@@ -31,6 +31,12 @@
         <aspectj.version>1.9.19</aspectj.version>
     </properties>
 
+    <contributors>
+        <contributor>
+            <name>Viktor Reinok</name>
+        </contributor>
+    </contributors>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
